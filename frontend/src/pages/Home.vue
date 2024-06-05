@@ -3,15 +3,13 @@
   <section class="py-5 text-center container">
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light">Album example</h1>
+        <h1 class="fw-light">Miri Box</h1>
         <p class="lead text-body-secondary">
-          Something short and leading about the collection below—its contents,
-          the creator, etc. Make it short and sweet, but not too short so folks
-          don’t simply skip over it entirely.
+          Read reviews before watching a movie. <br>
+          Participate in movie reviews!
         </p>
         <p>
-          <a href="#" class="btn btn-primary my-2">Main call to action</a>
-          <a href="#" class="btn btn-secondary my-2">Secondary action</a>
+          <router-link to="/write" class="btn btn-primary my-2">Join Review</router-link>
         </p>
       </div>
     </div>
@@ -21,51 +19,12 @@
   <div class="album py-5 bg-body-tertiary">
     <div class="container">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        <div class="col">
-          
+        
+        <div class="col" v-for="(item, i) in state.items" :key="i">
           <!-- 카드시작 -->
-          <div class="card shadow-sm">
-            <svg
-              class="bd-placeholder-img card-img-top"
-              width="100%"
-              height="225"
-              xmlns="http://www.w3.org/2000/svg"
-              role="img"
-              aria-label="Placeholder: Thumbnail"
-              preserveAspectRatio="xMidYMid slice"
-              focusable="false"
-            >
-              <title>Placeholder</title>
-              <rect width="100%" height="100%" fill="#55595c" />
-              <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-            </svg>
-            <div class="card-body">
-              <p class="card-text">
-                This is a wider card with supporting text below as a natural
-                lead-in to additional content. This content is a little bit
-                longer.
-              </p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button
-                    type="button"
-                    class="btn btn-sm btn-outline-secondary"
-                  >
-                    View
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-sm btn-outline-secondary"
-                  >
-                    Edit
-                  </button>
-                </div>
-                <small class="text-body-secondary">9 mins</small>
-              </div>
-            </div>
-          </div>
-
+          <Card :item="item"></Card>
         </div>
+
       </div>
     </div>
   </div>
@@ -73,15 +32,31 @@
 
 <script>
 import axios from "axios";
+import { reactive } from "vue";
+import Card from '../components/Card.vue'
 
 export default {
   name: "Home",
 
-  setup() {
-    axios.get("/api/movies").then((res) => {
-      console.log(res.data);
-    });
+  components : {
+    Card
   },
+
+  setup() {
+    const state = reactive({
+      items : []
+    })
+
+    axios.get("/api/movies").then((res) => {
+      // console.log(res.data);
+      state.items = res.data;
+      // console.log(state.items);
+    });
+
+    return { state }
+  },
+
+
 };
 </script>
 

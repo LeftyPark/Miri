@@ -2,7 +2,9 @@
   <div>
 
     <Header></Header>
-    <Home></Home>
+    
+    <router-view></router-view>
+    <!-- <Home></Home> -->
     <Footer></Footer>
 
 
@@ -10,17 +12,21 @@
 </template>
 
 <script>
-import Home from "./pages/Home.vue";
+// import Home from "./pages/Home.vue";
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
 
 export default {
   name: "App",
   components: {
-    Home,
+    // Home,
     Header,
     Footer
   },
+
+  setup(){
+    // console.log("+++++++++++++")
+  }
 };
 </script>
 
@@ -29,7 +35,7 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  /* text-align: center; */
   color: #2c3e50;
   /* margin-top: 60px; */
 }

@@ -4,7 +4,7 @@
   <nav class="navbar navbar-expand-lg bg-primary">
       <div class="container-fluid miri">
         <!-- <a class="navbar-brand" href="#">MIRI</a> -->
-        <a class="navbar-brand logo" href="#">MIRI</a>
+        <router-link class="navbar-brand logo" to="/">MIRI</router-link>
         <button
           class="navbar-toggler"
           type="button"
@@ -23,7 +23,10 @@
           >
 
             <li class="nav-item">
-              <a class="nav-link" href="#">List</a>
+              <router-link to="/login" class="nav-link">Login</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/list" class="nav-link">List</router-link>
             </li>
             <li class="nav-item dropdown">
               <a
